@@ -1,6 +1,8 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssChunksHtmlPlugin = require("css-chunks-html-webpack-plugin");
 
 module.exports = env => {
   const isProduction = env.MODE === "production";
@@ -26,14 +28,18 @@ module.exports = env => {
           test: /\.tsx?$/,
           exclude: [path.resolve(__dirname, "node_modules")],
           enforce: "pre",
-          use: isProduction
-            ? ["babel-loader", "awesome-typescript-loader", "tslint-loader"]
-            : [
-                "cache-loader",
-                "babel-loader",
-                "awesome-typescript-loader",
-                "tslint-loader"
+          use: ["babel-loader", "awesome-typescript-loader", "tslint-loader"]
+        },
+        {
+          test: /\.css$/,
+          use: isClient
+            ? [
+                {
+                  loader: MiniCssExtractPlugin.loader
+                },
+                "css-loader"
               ]
+            : ["ignore-loader"]
         }
       ]
     },
@@ -74,9 +80,14 @@ module.exports = env => {
             "process.env.MODE": JSON.stringify(env.MODE),
             "process.env.TARGET": JSON.stringify(env.TARGET)
           }),
+          new MiniCssExtractPlugin({
+            filename: "static/css/[name].css",
+            publicPath: "/"
+          }),
           new HTMLPlugin({
             template: path.resolve(__dirname, "src/index.ejs")
-          })
+          }),
+          new CssChunksHtmlPlugin({ inject: false })
         ]
       : [
           new webpack.DefinePlugin({

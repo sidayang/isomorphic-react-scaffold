@@ -1,5 +1,6 @@
 import React from "react";
 import useReactRouter from "use-react-router";
+import { Button } from "antd";
 
 interface IProps {}
 
@@ -10,7 +11,10 @@ export const PageOne = (props: IProps) => {
   };
   return (
     <div>
-      Page 1<button onClick={handleButtonClick}>Goto Page 2</button>
+      Page 1
+      <Button type="primary" onClick={handleButtonClick}>
+        Goto Page 2
+      </Button>
     </div>
   );
 };
