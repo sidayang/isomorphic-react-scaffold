@@ -28,7 +28,16 @@ module.exports = env => {
           test: /\.tsx?$/,
           exclude: [path.resolve(__dirname, "node_modules")],
           enforce: "pre",
-          use: ["babel-loader", "awesome-typescript-loader", "tslint-loader"]
+          use: [
+            "babel-loader",
+            {
+              loader: "awesome-typescript-loader",
+              options: {
+                reportFiles: ["src/**/*.{ts,tsx}"]
+              }
+            },
+            "tslint-loader"
+          ]
         },
         {
           test: /\.css$/,

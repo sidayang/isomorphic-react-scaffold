@@ -1,6 +1,12 @@
 import React from "react";
 import useReactRouter from "use-react-router";
 import { Button } from "antd";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  font-size: 14px;
+  color: #f5222d;
+`;
 
 interface IProps {}
 
@@ -10,11 +16,11 @@ export const PageOne = (props: IProps) => {
     history.push("/page-2");
   };
   return (
-    <div>
+    <Wrapper>
       Page 1
       <Button type="primary" onClick={handleButtonClick}>
         Goto Page 2
       </Button>
-    </div>
+    </Wrapper>
   );
 };

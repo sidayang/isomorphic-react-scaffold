@@ -1,8 +1,18 @@
 # isomorphic-react-scaffold
 
-A react app with isomorphic rendering out of the box, and also my practice of configuring webpack
+A react scaffold with isomorphic rendering out of the box, and also my practice of configuring webpack
 
-## Usage
+## Feature
+
+### This isomorphic scaffold come with what:
+
+[`Ant Design`](https://github.com/ant-design/ant-design)
+
+[`React Router`](https://github.com/ReactTraining/react-router)
+
+[`styled components`](https://github.com/styled-components/styled-components)
+
+## Demo
 
 `npm run build` will build bundles for client and server in ./client and ./server, respectively .
 
